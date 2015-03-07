@@ -144,11 +144,15 @@ def send_angleR():
 
 @app.route('/api/v0/theta', methods=['POST'])
 def receive_image():
-    data = request.form
-    image_string = cStringIO.StringIO(base64.b64decode(data['base64']))
+    data = request.form['base64']
+    # with open("base64.dat") as f:
+    #     data = f.read()
+    image_string = base64.b64decode(data)
+    # print image_string
     with open("theta.png", "wb") as f:
         f.write(image_string)
 
 
 if __name__ == '__main__':
     app.run()
+    # receive_image()
