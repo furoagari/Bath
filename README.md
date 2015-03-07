@@ -18,7 +18,7 @@
 + Temp
 + Press
 
-### /api/v0/banto
+### /api/v0/banto[LR]
 Edisonにサーボデータを送る
 
 + angle
