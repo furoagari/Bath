@@ -142,7 +142,7 @@ def send_angleR():
     return jsonify(**ret)
 
 
-@app.route('/api/v0/theta')
+@app.route('/api/v0/theta', methods=['POST'])
 def receive_image():
     data = request.form
     image_string = cStringIO.StringIO(base64.b64decode(data['base64']))
