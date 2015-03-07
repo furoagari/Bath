@@ -4,6 +4,8 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 import random
 from contextlib import closing
+import base64
+import cStringIO
 
 
 # configuration
@@ -138,6 +140,14 @@ def send_angleR():
     angle = calc_angle_flat()
     ret = {"angle": angle}
     return jsonify(**ret)
+
+
+@app.route('/api/v0/theta')
+def receive_image():
+    data = request.form
+    image_string = cStringIO.StringIO(base64.b64decode(data['base64']))
+    with open("theta.png", "wb") as f:
+        f.write(image_string)
 
 
 if __name__ == '__main__':
