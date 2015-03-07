@@ -1,6 +1,9 @@
 # ゆあがりPJのサーバ
+
+e.g. http://210.140.162.51/flaskr/api/v0/bantoL
+
 ## IPアドレス
- 210.140.162.51:5000
+ 210.140.162.51/flaskr
 
 ## API
 ### /api/v0/alps
@@ -22,6 +25,7 @@
 
 ### /api/v0/banto[LR]
 Edisonにサーボデータを送る
+
 
 + angle
   - 0 - 179
