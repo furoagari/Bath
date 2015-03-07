@@ -151,7 +151,7 @@ def receive_image():
     # print image_string
     with open("theta.png", "wb") as f:
         f.write(image_string)
-    return jsonify(**dict(status="SUCESS"))
+    return jsonify(**dict(status="SUCCESS"))
 
 
 if __name__ == '__main__':
