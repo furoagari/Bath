@@ -1,15 +1,17 @@
 <h1>hello</h1>
+{% for entry in entries %}
 <ul>
-    <li>{{ No }}</li>
-    <li>{{ MagX }}</li>
-    <li>{{ MagY }}</li>
-    <li>{{ MagZ }}</li>
-    <li>{{ AccX }}</li>
-    <li>{{ AccY }}</li>
-    <li>{{ AccZ }}</li>
-    <li>{{ Uv }}</li>
-    <li>{{ Lx }}</li>
-    <li>{{ Humi }}</li>
-    <li>{{ Temp }}</li>
-    <li>{{ Press }}</li>
+    <li>{{ entry.No }}</li>
+    <li>{{ entry.MagX }}</li>
+    <li>{{ entry.MagY }}</li>
+    <li>{{ entry.MagZ }}</li>
+    <li>{{ entry.AccX }}</li>
+    <li>{{ entry.AccY }}</li>
+    <li>{{ entry.AccZ }}</li>
+    <li>{{ entry.Uv }}</li>
+    <li>{{ entry.Lx }}</li>
+    <li>{{ entry.Humi }}</li>
+    <li>{{ entry.Temp }}</li>
+    <li>{{ entry.Press }}</li>
 </ul>
+{% endfor %}
