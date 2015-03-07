@@ -8,7 +8,7 @@ from contextlib import closing
 
 # configuration
 DATABASE = 'mydb'
-
+DEBUG = True
 
 # create our little application :)
 app = Flask(__name__)
@@ -96,22 +96,47 @@ def receive_alps():
                                Temp=val_Temp,
                                Press=val_Temp)])
 
+BACK = 0
+STOP = 45
+GO = 90
 
-def calc_angle(lr):
-    random_angle = random.choice([0, 45, 90, 135, 179])
-    ret = {"angle": random_angle}
-    return ret
+def calc_angle_akarui():
+    cur = g.db.execute('select Lx from entries order by id desc')
+    entries = [float(row[0]) for row in cur.fetchall()]
+    latest = entries[:30] # 100ms * 30 = 3s
+
+    if len(latest) == 0:
+        return STOP
+
+    avg = sum(latest) / float(len(latest))
+
+    if avg >= 200:
+        return STOP
+    elif avg >= 100:
+        return GO
+    else:
+        return BACK
+
+
+def calc_angle_random():
+    return random.choice([BACK, STOP, GO])
+
+
+def calc_angle_flat():
+    return STOP
 
 
 @app.route('/api/v0/bantoL')
 def send_angleL():
-    ret = calc_angle("l")
+    angle = calc_angle_akarui()
+    ret = {"angle": angle}
     return jsonify(**ret)
 
 
 @app.route('/api/v0/bantoR')
 def send_angleR():
-    ret = calc_angle("r")
+    angle = calc_angle_flat()
+    ret = {"angle": angle}
     return jsonify(**ret)
 
 
