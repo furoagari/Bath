@@ -23,6 +23,12 @@ e.g. http://210.140.162.51/flaskr/api/v0/bantoL
 + Temp
 + Press
 
+### /api/v0/theta
+
+シータのデータを受け取る
+
++ base64
+
 ### /api/v0/banto[LR]
 Edisonにサーボデータを送る
 
