@@ -1,7 +1,9 @@
 # all the imports
 # import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     abort, render_template, flash, jsonify
+import random
+
 
 # configuration
 # DATABASE = '/tmp/flaskr.db'
@@ -50,7 +52,25 @@ def receive_alps():
                            Humi=val_Humi,
                            Temp=val_Temp,
                            Press=val_Temp)
-                
+
+
+def calc_angle(lr):
+    random_angle = random.choice([0, 45, 90, 135, 179])
+    ret = {"angle": random_angle}
+    return ret
+
+
+@app.route('/api/v0/bantoL')
+def send_angleL():
+    ret = calc_angle("l")
+    return jsonify(**ret)
+
+
+@app.route('/api/v0/bantoR')
+def send_angleR():
+    ret = calc_angle("r")
+    return jsonify(**ret)
+
 
 if __name__ == '__main__':
     app.run()
