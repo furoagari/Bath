@@ -117,9 +117,9 @@ def receive_alps():
                                Temp=val_Temp,
                                Press=val_Temp)])
 
-BACK = 0
-STOP = 45
-GO = 90
+BACK = -1
+STOP = 0
+GO = 1
 
 @app.route('/api/v0/getdata')
 def get_data():
