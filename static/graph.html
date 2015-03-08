@@ -3,12 +3,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="./chartist.min.js"></script>
 <link rel="stylesheet" href="./chartist.min.css" />
+<style>
+.graph {
+	float: left;
+}
+</style>
 </head>
 <body>
+<div class="graph">
 <div class="ct-Lx ct-perfect-fourth"></div>
+<div class="ct-Humi ct-perfect-fourth"></div>
+<div class="ct-Press ct-perfect-fourth"></div>
+<div class="ct-Temp ct-perfect-fourth"></div>
+<div class="ct-Uv ct-perfect-fourth"></div>
+</div>
 <script>
 
-var interval = 3000;
+var interval = 15000;
 setInterval(function () {
 	$.ajax({
 		type: "GET",
@@ -22,7 +33,13 @@ setInterval(function () {
 			labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
   			series: [lx]
   			};
+  			var data1 = {
+			labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+  			series: [res['Humi']]
+  			};
+  			
 			new Chartist.Line('.ct-Lx', data);
+			new Chartist.Line('.ct-Humi', data1);
 		},
 		error: function() {
 			
