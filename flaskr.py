@@ -121,6 +121,20 @@ BACK = 0
 STOP = 45
 GO = 90
 
+@app.route('/api/v0/getdata')
+def get_data():
+	fields = ['N', 'MagX', 'MagY', 'MagZ', 'AccX', 'AccY', 'AccZ', 'Uv', 'Lx', 'Humi', 'Temp', 'Press']
+	ret = {}
+	c = request.args.get('c', '20')
+	cur = g.db.execute('select ' + ','.join(fields) + ' from entries order by id desc limit ' + c)
+	for row in cur:
+		for k, v in enumerate(fields):
+			ret.setdefault(v, [])
+			ret[v].append(row[k])
+
+	return jsonify(**ret)
+	
+
 def calc_angle_akarui():
     cur = g.db.execute('select Lx from entries order by id desc')
     entries = [float(row[0]) for row in cur.fetchall()]
