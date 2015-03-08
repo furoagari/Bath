@@ -42,9 +42,22 @@ def teardown_request(exception):
     if db is not None:
         db.close()
 
+
+def delete_old():
+    max_size = 1000
+    cur = g.db.execute('select count(*) from entries')
+    count = cur.fetchone()[0]
+    if count > max_size:
+        cur = g.db.execute('select id from entries order by id desc')
+        max_id = cur.fetchone()[0]
+        g.db.execute('delete from entries where id <= {0}'.format(
+            max_id - max_size))
+
     
 @app.route('/')
 def show_entries():
+    delete_old()
+
     cur = g.db.execute('select N, MagX, MagY, MagZ, AccX, AccY, AccZ, Uv, Lx, Humi, Temp, Press from entries order by id desc')
     entries = [dict(No=row[0],
                     MagX=row[1],
@@ -76,6 +89,12 @@ def receive_alps():
     val_Humi = request.form['Humi']
     val_Temp = request.form['Temp']
     val_Press = request.form['Press']
+
+    # clear db
+    if val_No == "0":
+        g.db.execute('delete from entries')
+    else:
+        delete_old()
 
     # store value in sqlite3
     g.db.execute('insert into entries (N, MagX, MagY, MagZ, AccX, AccY, AccZ, Uv, Lx, Humi, Temp, Press) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
