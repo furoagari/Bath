@@ -4,22 +4,25 @@
 <script src="./chartist.min.js"></script>
 <link rel="stylesheet" href="./chartist.min.css" />
 <style>
-.graph {
-	float: left;
-}
+
 </style>
 </head>
 <body>
 <div class="graph">
-<div class="ct-Lx ct-perfect-fourth"></div>
-<div class="ct-Humi ct-perfect-fourth"></div>
-<div class="ct-Press ct-perfect-fourth"></div>
-<div class="ct-Temp ct-perfect-fourth"></div>
-<div class="ct-Uv ct-perfect-fourth"></div>
+<div class="ct-Lx ct-chart ct-perfect-fourth"></div>
+<div class="ct-Humi ct-chart ct-perfect-fourth"></div>
+<div class="ct-Press ct-chart ct-perfect-fourth"></div>
+<div class="ct-Temp ct-chart ct-perfect-fourth"></div>
+<div class="ct-Uv ct-chart ct-perfect-fourth"></div>
 </div>
 <script>
 
 var interval = 3000;
+var options = {
+  width: '400px',
+  height: '300px'
+};
+
 
 	$.ajax({
 		type: "GET",
@@ -39,8 +42,8 @@ var interval = 3000;
   			};
   			
   			
-			new Chartist.Line('.ct-Lx', data);
-			new Chartist.Line('.ct-Humi', data1);
+			new Chartist.Line('.ct-Lx', data,options);
+			new Chartist.Line('.ct-Humi',options);
 		},
 		error: function() {
 			
@@ -66,8 +69,8 @@ setInterval(function () {
   			};
   			
   			
-			new Chartist.Line('.ct-Lx', data);
-			new Chartist.Line('.ct-Humi', data1);
+			new Chartist.Line('.ct-Lx', data,,options);
+			new Chartist.Line('.ct-Humi', data1,options);
 		},
 		error: function() {
 			
