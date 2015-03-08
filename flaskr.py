@@ -182,7 +182,7 @@ def receive_image():
     #     data = f.read()
     image_string = base64.b64decode(data)
     # print image_string
-    with open("theta.png", "wb") as f:
+    with open("/var/www/html/theta.png", "wb") as f:
         f.write(image_string)
     return jsonify(**dict(status="SUCCESS"))
 
