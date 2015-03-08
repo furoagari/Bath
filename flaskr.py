@@ -44,7 +44,7 @@ def teardown_request(exception):
 
 
 def delete_old():
-    max_size = 1000
+    max_size = 100
     cur = g.db.execute('select count(*) from entries')
     count = cur.fetchone()[0]
     if count > max_size:
@@ -138,19 +138,19 @@ def get_data():
 def calc_angle_akarui():
     cur = g.db.execute('select Lx from entries order by id desc')
     entries = [float(row[0]) for row in cur.fetchall()]
-    latest = entries[:30] # 100ms * 30 = 3s
+    latest = entries[:50] # 100ms * 50 = 5s
 
     if len(latest) == 0:
         return STOP
 
     avg = sum(latest) / float(len(latest))
 
-    if avg >= 200:
-        return STOP
-    elif avg >= 100:
+    lx = avg * 20
+
+    if lx >= 200:
         return GO
     else:
-        return BACK
+        return STOP
 
 
 def calc_angle_random():
