@@ -4,6 +4,7 @@ e.g. http://210.140.162.51/flaskr/api/v0/bantoL
 
 ## IPアドレス
  210.140.162.51/flaskr
+ yuagari.mi5.jp
 
 ## API
 ### /api/v0/alps
