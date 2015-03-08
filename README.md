@@ -28,7 +28,9 @@ e.g. http://210.140.162.51/flaskr/api/v0/bantoL
 シータのデータを受け取る
 
 + base64
-
++ 保存画像
+  - /var/www/html/theta.png
+ 
 ### /api/v0/banto[LR]
 Edisonにサーボデータを送る
 
